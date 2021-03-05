@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Overview from "./components/Overview";
 
 class App extends Component {
   constructor() {
@@ -9,16 +10,37 @@ class App extends Component {
       tasks: [],
     };
   }
+
+  handleChange = (e) => {
+    this.setState({
+      task: e.target.value,
+    });
+  };
+
+  onSubmitTask = (e) => {
+    e.preventDefault();
+    this.setState({
+      tasks: this.state.tasks.concat(this.state.task),
+      task: "",
+    });
+  };
+
   render() {
     const { task, tasks } = this.state;
 
     return (
       <div>
-        <form>
+        <form onSubmit={this.onSubmitTask}>
           <label htmlFor="taskInput">Enter task</label>
-          <input type="text" id="taskInput" />
+          <input
+            onChange={this.handleChange}
+            value={this.state.task}
+            type="text"
+            id="taskInput"
+          />
           <button type="submit">Add Task</button>
         </form>
+        <Overview tasks={tasks} />
       </div>
     );
   }
