@@ -1,10 +1,11 @@
 import React from "react";
+import uniqid from "uniqid";
 
 const Overview = (props) => {
   return (
     <ul>
       {props.tasks.map((task) => {
-        return <li>{task}</li>;
+        return <li key={uniqid()}>{task}</li>;
       })}
     </ul>
   );
