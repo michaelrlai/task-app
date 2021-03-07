@@ -23,6 +23,17 @@ class App extends Component {
       tasks: this.state.tasks.concat(this.state.task),
       task: "",
     });
+    console.log(this.state.tasks);
+  };
+
+  deleteTask = (e) => {
+    console.log(e.target.parentNode.id);
+    this.setState({
+      tasks: this.state.tasks.filter((task) => {
+        console.log(task.id);
+        return task !== e.target.parentNode.id;
+      }),
+    });
   };
 
   render() {
@@ -38,7 +49,7 @@ class App extends Component {
           />
           <button type="submit">Add task</button>
         </form>
-        <Overview tasks={this.state.tasks} />
+        <Overview tasks={this.state.tasks} onDeleteButton={this.deleteTask} />
       </div>
     );
   }
